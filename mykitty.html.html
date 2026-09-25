@@ -1,0 +1,741 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>UNKNOWN SYSTEM</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at center, #210018 0%, #080008 65%);
+    color: #ff2bd6;
+    font-family: "Courier New", monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* OLD COMPUTER SCREEN */
+
+.monitor {
+    width: 850px;
+    min-height: 570px;
+    padding: 12px;
+    background: #111;
+    border: 12px solid #292929;
+    border-radius: 18px;
+    box-shadow:
+        0 0 0 5px #151515,
+        0 0 40px #ff1493,
+        inset 0 0 30px #000;
+}
+
+/* SCREEN */
+
+.screen {
+    min-height: 530px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,0.025) 0px,
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px,
+            transparent 4px
+        ),
+        #090008;
+
+    border: 3px solid #ff2bd6;
+
+    box-shadow:
+        inset 0 0 35px #ff1493,
+        0 0 20px #ff2bd6;
+}
+
+/* CRT EFFECT */
+
+.screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,0.03) 50%,
+            transparent 50%
+        );
+
+    background-size: 100% 4px;
+
+    animation: scanlines 0.15s linear infinite;
+}
+
+@keyframes scanlines {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(4px);
+    }
+}
+
+/* TEXT */
+
+h1 {
+    text-align: center;
+    letter-spacing: 8px;
+    font-size: 28px;
+    text-shadow: 0 0 10px #ff2bd6;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ff2bd6;
+    margin: 25px 0;
+}
+
+p {
+    margin: 15px 0;
+}
+
+.small {
+    font-size: 13px;
+}
+
+/* INPUTS */
+
+input {
+    background: #080008;
+    border: 1px solid #ff2bd6;
+    color: #ff7be8;
+    padding: 11px;
+    width: 300px;
+    font-family: monospace;
+    outline: none;
+    margin-bottom: 12px;
+
+    box-shadow: inset 0 0 8px #350025;
+}
+
+input:focus {
+    box-shadow:
+        0 0 10px #ff2bd6,
+        inset 0 0 10px #350025;
+}
+
+/* BUTTON */
+
+button {
+    background: #ff2bd6;
+    color: #12000d;
+    border: none;
+    padding: 12px 20px;
+    font-family: monospace;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 12px;
+
+    box-shadow: 0 0 12px #ff2bd6;
+}
+
+button:hover {
+    background: white;
+    box-shadow: 0 0 25px #ff2bd6;
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+/* OPTIONS */
+
+.option {
+    display: block;
+    width: 500px;
+    margin: 10px 0;
+    padding: 10px;
+
+    border: 1px dashed #ff2bd6;
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #30001f;
+    box-shadow: 0 0 10px #ff2bd6;
+}
+
+.option input {
+    width: auto;
+    margin: 0 8px 0 0;
+    accent-color: #ff2bd6;
+}
+
+/* RESULT */
+
+#result {
+    margin-top: 25px;
+    min-height: 80px;
+    line-height: 1.7;
+}
+
+/* CAT */
+
+.cat {
+    position: absolute;
+    right: 45px;
+    bottom: 35px;
+
+    font-size: 24px;
+    line-height: 25px;
+
+    white-space: pre;
+
+    color: #ff2bd6;
+
+    text-shadow:
+        0 0 5px #ff2bd6,
+        0 0 15px #ff1493;
+
+    animation: catFloat 2s ease-in-out infinite;
+}
+
+@keyframes catFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* BLINKING CAT EYES */
+
+.eye {
+    animation: blink 4s infinite;
+}
+
+@keyframes blink {
+
+    0%, 92%, 100% {
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 0;
+    }
+}
+
+/* STATUS */
+
+.status {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 11px;
+
+    animation: blinkStatus 1.5s infinite;
+}
+
+@keyframes blinkStatus {
+
+    50% {
+        opacity: 0.25;
+    }
+}
+
+/* LOADING */
+
+.loading {
+    margin-top: 25px;
+}
+
+.bar {
+    width: 400px;
+    height: 18px;
+    border: 1px solid #ff2bd6;
+    margin-top: 10px;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: #ff2bd6;
+    box-shadow: 0 0 12px #ff2bd6;
+    transition: width 0.1s;
+}
+
+/* GLITCH */
+
+.glitch {
+    animation: glitch 0.15s infinite;
+}
+
+@keyframes glitch {
+
+    0% {
+        transform: translate(0);
+    }
+
+    25% {
+        transform: translate(2px, -1px);
+    }
+
+    50% {
+        transform: translate(-2px, 1px);
+    }
+
+    75% {
+        transform: translate(1px, 2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+/* HIDDEN */
+
+.hidden {
+    display: none;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="monitor">
+
+<div class="screen">
+
+<div class="status">● SYSTEM ONLINE</div>
+
+
+<!-- LOGIN SCREEN -->
+
+<div id="login">
+
+<h1>UNKNOWN SYSTEM</h1>
+
+<hr>
+
+<p>CYBERNETIC ACCESS TERMINAL v0.7</p>
+
+<p>[ OK ] MEMORY CHECK</p>
+
+<p>[ OK ] CRT DISPLAY</p>
+
+<p>[ OK ] USER DATABASE</p>
+
+<p>> awaiting human...</p>
+
+<br>
+
+<p>USER:</p>
+
+<input
+    id="username"
+    type="text"
+    placeholder="enter username"
+>
+
+<p>PASSWORD:</p>
+
+<input
+    id="password"
+    type="password"
+    placeholder="enter password"
+>
+
+<br>
+
+<button onclick="login()">
+    LOGIN
+</button>
+
+<div id="loginResult"></div>
+
+</div>
+
+
+<!-- LOADING SCREEN -->
+
+<div id="loading" class="hidden">
+
+<h1>CONNECTING...</h1>
+
+<hr>
+
+<p>> establishing connection...</p>
+
+<p>> locating human...</p>
+
+<p>> checking brain activity...</p>
+
+<div class="loading">
+
+<div class="bar">
+<div id="progress" class="progress"></div>
+</div>
+
+<p id="loadText">0%</p>
+
+</div>
+
+</div>
+
+
+<!-- QUESTION SCREEN -->
+
+<div id="questions" class="hidden">
+
+<h1>WELCOME, HUMAN</h1>
+
+<hr>
+
+<p id="question"></p>
+
+<div id="answers"></div>
+
+<div id="result"></div>
+
+</div>
+
+
+<!-- CAT -->
+
+<div id="cat" class="cat">
+
+ /\_/\\
+( <span class="eye">o.o</span> )
+ > ^ <
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+let currentQuestion = 0;
+
+let questions = [
+
+{
+    text: "WHY DID YOU ENTER THIS TERMINAL?",
+    answers: [
+        "I was curious.",
+        "I was bored.",
+        "I shouldn't be here.",
+        "I have no idea."
+    ]
+},
+
+{
+    text: "CHOOSE YOUR CURRENT BRAIN STATUS:",
+    answers: [
+        "100% functioning",
+        "running on 2 brain cells",
+        "system overheating",
+        "brain.exe stopped working"
+    ]
+},
+
+{
+    text: "A STRANGER OFFERS YOU $1,000,000. WHAT DO YOU DO?",
+    answers: [
+        "Take it.",
+        "Ask why.",
+        "Run away.",
+        "Wake up because this is obviously a dream."
+    ]
+}
+
+];
+
+
+function login() {
+
+    let name =
+        document.getElementById("username").value;
+
+    let password =
+        document.getElementById("password").value;
+
+    let result =
+        document.getElementById("loginResult");
+
+
+    if (name === "") {
+
+        result.innerHTML =
+            "> ERROR: username missing.";
+
+        return;
+    }
+
+
+    if (password === "") {
+
+        result.innerHTML =
+            "> ERROR: password missing.";
+
+        return;
+    }
+
+
+    result.innerHTML =
+        "> verifying identity...";
+
+
+    setTimeout(() => {
+
+        document.getElementById("login").classList.add("hidden");
+
+        document
+            .getElementById("loading")
+            .classList.remove("hidden");
+
+        startLoading();
+
+    }, 1000);
+
+}
+
+
+function startLoading() {
+
+    let progress = 0;
+
+    let bar =
+        document.getElementById("progress");
+
+    let text =
+        document.getElementById("loadText");
+
+
+    let loading =
+        setInterval(() => {
+
+            progress += 2;
+
+            bar.style.width =
+                progress + "%";
+
+            text.innerHTML =
+                progress + "%";
+
+
+            if (progress >= 100) {
+
+                clearInterval(loading);
+
+                setTimeout(() => {
+
+                    document
+                        .getElementById("loading")
+                        .classList.add("hidden");
+
+                    document
+                        .getElementById("questions")
+                        .classList.remove("hidden");
+
+                    showQuestion();
+
+                }, 500);
+
+            }
+
+        }, 50);
+
+}
+
+
+function showQuestion() {
+
+    let q =
+        questions[currentQuestion];
+
+
+    document.getElementById("question").innerHTML =
+        "> " + q.text;
+
+
+    let answers =
+        document.getElementById("answers");
+
+
+    answers.innerHTML = "";
+
+
+    q.answers.forEach((answer, index) => {
+
+        let label =
+            document.createElement("label");
+
+        label.className = "option";
+
+
+        label.innerHTML =
+
+            '<input type="radio" name="answer" value="' +
+            index +
+            '">' +
+
+            answer;
+
+
+        label.onclick =
+            function() {
+
+                react(index);
+
+            };
+
+
+        answers.appendChild(label);
+
+    });
+
+}
+
+
+function react(answer) {
+
+    let result =
+        document.getElementById("result");
+
+    let cat =
+        document.getElementById("cat");
+
+
+    let reactions = [
+
+        "> SYSTEM: interesting choice...",
+        
+        "> SYSTEM: your brain appears questionable.",
+
+        "> SYSTEM: WARNING. INTRUDER DETECTED.",
+
+        "> SYSTEM: honestly... same."
+
+    ];
+
+
+    result.innerHTML =
+        reactions[answer];
+
+
+    /* CAT REACTION */
+
+    if (answer === 0) {
+
+        cat.innerHTML =
+
+` /\\_/\\\\
+( ^.^ )
+ > ^ <`;
+
+    }
+
+    else if (answer === 1) {
+
+        cat.innerHTML =
+
+` /\\_/\\\\
+( -.- )
+ > ^ <`;
+
+    }
+
+    else if (answer === 2) {
+
+        cat.innerHTML =
+
+` /\\_/\\\\
+( >.< )
+ > ^ <`;
+
+        document
+            .getElementById("cat")
+            .classList.add("glitch");
+
+
+        setTimeout(() => {
+
+            document
+                .getElementById("cat")
+                .classList.remove("glitch");
+
+        }, 1000);
+
+    }
+
+    else {
+
+        cat.innerHTML =
+
+` /\\_/\\\\
+( o_o )
+ > ^ <`;
+
+    }
+
+
+    currentQuestion++;
+
+
+    if (currentQuestion < questions.length) {
+
+        setTimeout(() => {
+
+            showQuestion();
+
+        }, 1800);
+
+    }
+
+    else {
+
+        setTimeout(() => {
+
+            result.innerHTML +=
+                "<br><br>> END OF TEST." +
+                "<br>> you may now leave.";
+
+        }, 1500);
+
+    }
+
+}
+
+
+</script>
+
+
+</body>
+</html>
+```
